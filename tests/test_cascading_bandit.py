@@ -6,13 +6,15 @@ from src.cascading_bandit import CascadeLinTS
 
 @pytest.fixture
 def cascade_lin_ts_bandit():
-    features = np.array([
-        [1., 6., 11.],
-        [2., 7., 12.],
-        [3., 8., 13.],
-        [4., 9., 14.],
-        [5., 10., 15.]
-    ])
+    features = np.array(
+        [
+            [1.0, 6.0, 11.0],
+            [2.0, 7.0, 12.0],
+            [3.0, 8.0, 13.0],
+            [4.0, 9.0, 14.0],
+            [5.0, 10.0, 15.0],
+        ]
+    )
     return CascadeLinTS(features, max_items=2, n_arms_to_show=2)
 
 
@@ -31,8 +33,9 @@ def test_update_vector_b(cascade_lin_ts_bandit, mocker):
     mocker.patch("src.cascading_bandit.CascadeLinTS.get", return_value=np.array([2, 1]))
     rewards = [0, 1]
     cascade_lin_ts_bandit.update(rewards, np.array([2, 1]))
-    assert np.array_equal(cascade_lin_ts_bandit.vector_b,
-                          np.array([6., 7., 8., 9., 10.]))
+    assert np.array_equal(
+        cascade_lin_ts_bandit.vector_b, np.array([6.0, 7.0, 8.0, 9.0, 10.0])
+    )
 
 
 def test_vector_b_and_matrix_m_initialization(cascade_lin_ts_bandit):
@@ -46,8 +49,3 @@ def test_name(cascade_lin_ts_bandit):
 
 def test_full_name(cascade_lin_ts_bandit):
     assert cascade_lin_ts_bandit.full_name() == "CascadeLinTS_1"
-
-
-
-
-

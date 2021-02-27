@@ -32,10 +32,9 @@ class DataInformation:
             "rating_column_name": self.rating_column_name,
             "raw_rating_column_name": self.raw_rating_column_name,
             "rating_column_expression": self.get_expression(),
-            "pivot_info": asdict(self.pivot_info)
+            "pivot_info": asdict(self.pivot_info),
         }
 
     def get_expression(self):
         full_expr = getsource(self.rating_column_expression)
         return full_expr.split("=")[1].replace(",\n", "")
-

@@ -15,22 +15,18 @@ UCB_C_VALUE = 2
 DATA_PATH = ""
 
 dataset_info = DataInformation(
-        path=pathlib.Path(DATA_PATH),
-        sep="\t",
-        header=['user_id', 'item_id', 'rating', 'timestamp'],
-        create=True,
-        raw_rating_column_name="rating",
-        rating_column_expression=lambda x: 1 if x > 3 else 0,
-        pivot_info=PivotInfo(
-            values="rating",
-            columns="item_id",
-            index="user_id"
-        )
-    )
+    path=pathlib.Path(DATA_PATH),
+    sep="\t",
+    header=["user_id", "item_id", "rating", "timestamp"],
+    create=True,
+    raw_rating_column_name="rating",
+    rating_column_expression=lambda x: 1 if x > 3 else 0,
+    pivot_info=PivotInfo(values="rating", columns="item_id", index="user_id"),
+)
 
 explorer = Explorer(dataset_info, N_FEATURES)
 
 bandits = [
-        CascadeLinTS(features=explorer.get_features()),
-        CascadeLinUCB(c=UCB_C_VALUE, features=explorer.get_features())
-    ]
+    CascadeLinTS(features=explorer.get_features()),
+    CascadeLinUCB(c=UCB_C_VALUE, features=explorer.get_features()),
+]
