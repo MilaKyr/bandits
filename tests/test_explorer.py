@@ -54,11 +54,6 @@ def test_explorer_get_features(explorer):
     assert np.array_equal(explorer.get_features(), explorer.helper.features)
 
 
-def test_explorer_get_reward(explorer):
-    result = explorer.get_rewards(2, np.array([0, 2]))
-    assert np.array_equal(result, explorer.helper.dataset.iloc[2, [0, 2]])
-
-
 def test_explorer_experiment(explorer, mocker):
     mocker.patch("src.cascading_bandit.CascadeLinTS.get", side_effect=[[1], [1], [1], [1], [1]])
     bandit = CascadeLinTS(explorer.get_features(), max_items=1, n_arms_to_show=1)
