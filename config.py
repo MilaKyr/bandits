@@ -12,7 +12,7 @@ playing with MAB.
 N_FEATURES = 16
 N_ROUNDS = 3
 UCB_C_VALUE = 2
-DATA_PATH = "/home/private/Documents/u.data"
+DATA_PATH = ""
 
 dataset_info = DataInformation(
         path=pathlib.Path(DATA_PATH),
